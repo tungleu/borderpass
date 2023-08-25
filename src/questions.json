@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "question": "What is your name?",
+    "type": "text",
+    "options": [],
+    "required": true
+  },
+  {
+    "id": 2,
+    "question": "Are you Canadian?",
+    "type": "checkbox",
+    "options": ["Yes", "No"],
+    "required": true
+  },
+  {
+    "id": 3,
+    "question": "How many year of experience you have?",
+    "type": "dropdown",
+    "options": ["0", "1-2", "3", "4+"],
+    "required": true
+  },
+  {
+    "id": 4,
+    "question": "Which language do you prefer?",
+    "type": "radio",
+    "options": ["English", "French", "Vietnamese"],
+    "required": true
+  },
+  {
+    "id": 5,
+    "question": "Do you have anythng to add?",
+    "type": "text",
+    "options": [],
+    "required": false
+  }
+]
