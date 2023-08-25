@@ -4,12 +4,11 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors()); // Enable CORS to allow cross-origin requests
-app.use(bodyParser.json()); // Parse JSON requests
+app.use(cors());
+app.use(bodyParser.json());
 
 const answeredQuestions = [];
 
-// Endpoint to receive answers
 app.post('/submit-answer', (req, res) => {
     const answer = req.body.answer;
     const questionId = req.body.questionId;
@@ -22,7 +21,7 @@ app.post('/submit-answer', (req, res) => {
     }
 });
 
-const port = 3001; // Use a port different from your React app
+const port = 3001;
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
