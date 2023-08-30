@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, Container, Grid} from '@mui/material';
+import {Button, Grid} from '@mui/material';
 import questionsData from './questions.json';
 import QuestionPage from './QuestionPage';
 
@@ -40,7 +40,7 @@ function QuestionnaireApp() {
     };
 
     return (
-        <Grid container justifyContent="center">
+        <Grid container>
             {currentIndex < questionsData.length ? (
                 <QuestionPage
                     question={questionsData[currentIndex]}
@@ -50,7 +50,6 @@ function QuestionnaireApp() {
             ) : (
                 <div>
                     <h2>Questionnaire Completed</h2>
-                    {/* Display submitted answers */}
                     <pre>{JSON.stringify(answers, null, 2)}</pre>
                     <Button onClick={submitAllAnswers}>Submit answers</Button>
                 </div>

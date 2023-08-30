@@ -28,21 +28,25 @@ interface QuestionPageProps {
 function QuestionPage({ question, onAnswer, onBack }: QuestionPageProps) {
     const [selectedOption, setSelectedOption] = useState('');
     const [textInput, setTextInput] = useState('');
+    const [isAnswered, setIsAnswered] = useState(true);
+    const [warning, setWarning] = useState(false);
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent) => {
         setSelectedOption(e.target.value);
         setIsAnswered(true);
-    };
+        setWarning(false);
 
+    };
     const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTextInput(e.target.value);
         setIsAnswered(true);
+        setWarning(false);
     };
-    const [isAnswered, setIsAnswered] = useState(false)
 
-    const handleSubmit = () => {
+    const handleSubmit = (isRequired: boolean) => {
         const answer = question.type === 'text' ? textInput : selectedOption;
-        onAnswer(answer);
+        (answer || !isRequired) && onAnswer(answer);
+        !answer && setWarning(true)
         setSelectedOption('');
         setTextInput('');
         setIsAnswered(false);
@@ -50,11 +54,15 @@ function QuestionPage({ question, onAnswer, onBack }: QuestionPageProps) {
 
 
     return (
-        <Grid>
-            <Grid>
-            <Typography variant="h6">Question {question.id}  </Typography>
-            {question.required && !isAnswered && (<Typography color="error">*required</Typography>)}
-            <Typography variant="body1">{question.question}</Typography>
+        <Grid container>
+            <Grid container>
+            <Typography variant="h6">Question {question.id}
+                <br/>
+                <Typography display="inline" variant="body1">{question.question}</Typography>
+                {question.required && (<Typography display="inline" color="error"> *</Typography>)}
+                {(question.required && warning) && (<Typography display="inline" color="error"> Question is required</Typography>)}
+            </Typography>
+            <Grid container>
             {question.type === 'radio' && (
                 <FormControl component="fieldset">
                     <RadioGroup
@@ -74,6 +82,7 @@ function QuestionPage({ question, onAnswer, onBack }: QuestionPageProps) {
             )}
             {question.type === 'text' && (
                 <TextField
+                    error={!isAnswered}
                     value={textInput}
                     onChange={handleTextInputChange}
                     variant="outlined"
@@ -113,15 +122,12 @@ function QuestionPage({ question, onAnswer, onBack }: QuestionPageProps) {
                 </FormControl>
             )}
             </Grid>
-            <Grid container spacing={2} columns={16}>
-                <Grid item xs={8}>
+            </Grid>
+            <Grid container justifyContent={"space-between"} alignItems="center">
                     <Button onClick={onBack} disabled={question.id === 1}>
                         BACK
                     </Button>
-                </Grid>
-                <Grid item xs={8}>
-                    <Button onClick={handleSubmit} disabled={!isAnswered && question.required}>NEXT</Button>
-                </Grid>
+                    <Button onClick={() => handleSubmit(question.required)}>NEXT</Button>
             </Grid>
         </Grid>
     );

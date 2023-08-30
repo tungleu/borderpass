@@ -11,7 +11,7 @@
     "question": "Are you Canadian?",
     "type": "checkbox",
     "options": ["Yes", "No"],
-    "required": true
+    "required": false
   },
   {
     "id": 3,
@@ -29,7 +29,7 @@
   },
   {
     "id": 5,
-    "question": "Do you have anythng to add?",
+    "question": "Do you have anything to add?",
     "type": "text",
     "options": [],
     "required": false
