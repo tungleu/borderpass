@@ -82,7 +82,7 @@ function QuestionPage({ question, onAnswer, onBack }: QuestionPageProps) {
             )}
             {question.type === 'text' && (
                 <TextField
-                    error={!isAnswered}
+                    error={!isAnswered && warning}
                     value={textInput}
                     onChange={handleTextInputChange}
                     variant="outlined"

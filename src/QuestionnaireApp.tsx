@@ -17,6 +17,7 @@ function QuestionnaireApp() {
         setCurrentIndex(currentIndex + 1);
     };
     const submitAllAnswers = async () => {
+        console.log(answers);
         try {
             const response = await fetch('http://localhost:3001/submit-answers', {
                 method: 'POST',

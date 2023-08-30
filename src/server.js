@@ -7,15 +7,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const answeredQuestions = [];
+app.post('/submit-answers', (req, res) => {
+    const answers = req.body
 
-app.post('/submit-answer', (req, res) => {
-    const answer = req.body.answer;
-    const questionId = req.body.questionId;
-
-    if (answer !== undefined && questionId !== undefined) {
-        answeredQuestions.push({ questionId, answer });
+    if (answers !== undefined) {
         res.status(200).json({ message: 'Answer received successfully' });
+        console.log(answers)
     } else {
         res.status(400).json({ message: 'Invalid answer format' });
     }
